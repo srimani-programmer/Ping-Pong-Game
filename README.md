@@ -28,6 +28,4 @@ It is multiplayer ping pong game build on turtle module. where two persons can p
 
 ## Disclaimer:
 
-This project is intended for non-commercial educational purposes only.
-
-
+This project is Open Source licensed.
