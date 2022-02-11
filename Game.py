@@ -4,6 +4,8 @@
 
 import turtle as t
 import os
+import time
+from playsound import playsound #playsound==1.2.2
 
 # Score varibales
 
@@ -39,18 +41,18 @@ paddle_right.goto(350,0)
 # Creating a pong ball for the game
 
 ball = t.Turtle()
-ball.speed(0)
+ball.speed()
 ball.shape('circle')
 ball.color('yellow')
 ball.penup()
 ball.goto(0,0)
 ball_dx = 1.5   # Setting up the pixels for the ball movement.
-ball_dy = 1.5
+ball_dy = -1.5
 
 # Creating a pen for updating the Score
 
 pen = t.Turtle()
-pen.speed(0)
+pen.speed()
 pen.color('skyblue')
 pen.penup()
 pen.hideturtle()
@@ -99,8 +101,11 @@ win.onkeypress(paddle_right_down,"Down")
 
 # Main Game Loop
 
+
 while True:
     win.update() # This methods is mandatory to run any game
+
+    time.sleep(1 / 60)
 
     # Moving the ball
     ball.setx(ball.xcor() + ball_dx)
@@ -124,7 +129,7 @@ while True:
         player_a_score = player_a_score + 1
         pen.clear()
         pen.write("Player A: {}                    Player B: {} ".format(player_a_score,player_b_score),align="center",font=('Monaco',24,"normal"))
-        os.system("afplay wallhit.wav&")
+        playsound("wallhit.wav")
 
 
 
@@ -134,7 +139,7 @@ while True:
         player_b_score = player_b_score + 1
         pen.clear()
         pen.write("Player A: {}                    Player B: {} ".format(player_a_score,player_b_score),align="center",font=('Monaco',24,"normal"))
-        os.system("afplay wallhit.wav&")
+        playsound("wallhit.wav")
 
 
     # Handling the collisions with paddles.
@@ -142,9 +147,10 @@ while True:
     if(ball.xcor() > 340) and (ball.xcor() < 350) and (ball.ycor() < paddle_right.ycor() + 40 and ball.ycor() > paddle_right.ycor() - 40):
         ball.setx(340)
         ball_dx = ball_dx * -1
-        os.system("afplay paddle.wav&")
-
+        playsound("paddle.wav")
+    
     if(ball.xcor() < -340) and (ball.xcor() > -350) and (ball.ycor() < paddle_left.ycor() + 40 and ball.ycor() > paddle_left.ycor() - 40):
         ball.setx(-340)
         ball_dx = ball_dx * -1
-        os.system("afplay paddle.wav&")
+        playsound("paddle.wav")
+
